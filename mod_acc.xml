@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>Acc server companion</name>
+    <author>Jesper Holster</author>
+    <version>0.0.2</version>
+    <description>A joomla module to display acc results</description>
+    <files>
+        <filename>mod_acc.xml</filename>
+        <filename module="mod_acc">mod_acc.php</filename>
+        <filename>index.html</filename>
+        <filename>helper.php</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+        <folder>sql</folder>
+    </files>
+    <config>
+    </config>
+</extension>
