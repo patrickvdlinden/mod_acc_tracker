@@ -10,12 +10,14 @@ class ModACCHelper {
 
 	protected $cacheId = 'mod_acc';
 
+	protected $debug = TRUE;
+
 	public function __construct() {
 		$this->cache = JFactory::getCache('mod_acc', '');
 	}
 
 	public function getData() {
-		if ($this->cache->contains($this->cacheId))
+		if (!$this->debug && $this->cache->contains($this->cacheId))
 		{
 			return $this->cache->get($this->cacheId);
 		}
@@ -47,10 +49,10 @@ class ModACCHelper {
 		$data    = $this->getData();
 		$results = [];
 
-		foreach ($data['response'] as $server)
+		foreach ($data['response'] as $key => $server)
 		{
 			$bestResults = [];
-			foreach ($server as $key => $result)
+			foreach ($server as $result)
 			{
 				if ($result->sessionResult && $lines = $result->sessionResult->leaderBoardLines)
 				{
