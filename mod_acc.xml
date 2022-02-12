@@ -2,7 +2,7 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Acc server companion</name>
     <author>Jesper Holster</author>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <description>A joomla module to display acc results</description>
     <files>
         <filename>mod_acc.xml</filename>

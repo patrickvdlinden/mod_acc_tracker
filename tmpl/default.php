@@ -73,9 +73,7 @@ defined('_JEXEC') or die; ?>
 											<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestLap - $optimal, FALSE); ?>
                     </td>
                     <td>
-                      <pre>
-<?php if(isset($bestResult->totalLapCount)) : echo $bestResult->totalLapCount; endif; ?>
-                        </pre>
+											<?php echo $server['lapCounts'][$bestResult->currentDriver->playerId] ?>
                     </td>
                 </tr>
 						<?php endforeach; ?>
