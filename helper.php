@@ -53,38 +53,41 @@ class ModACCHelper {
 		$data    = $this->getData();
 		$results = [];
 
-		foreach ($data['response'] as $key => $server)
+		if (isset($data['response']))
 		{
-			$bestResults = [];
-			foreach ($server as $result)
+			foreach ($data['response'] as $key => $server)
 			{
-				if (isset($result->sessionResult) && $lines = $result->sessionResult->leaderBoardLines)
+				$bestResults = [];
+				foreach ($server as $result)
 				{
-					foreach ($lines as $line)
+					if (isset($result->sessionResult) && $lines = $result->sessionResult->leaderBoardLines)
 					{
-						if (isset($bestResults[$line->currentDriver->playerId]))
+						foreach ($lines as $line)
 						{
-							if ($line->timing->bestLap < $bestResults[$line->currentDriver->playerId]->timing->bestLap)
+							if (isset($bestResults[$line->currentDriver->playerId]))
+							{
+								if ($line->timing->bestLap < $bestResults[$line->currentDriver->playerId]->timing->bestLap)
+								{
+									$bestResults[$line->currentDriver->playerId] = $line;
+								}
+							}
+							else
 							{
 								$bestResults[$line->currentDriver->playerId] = $line;
 							}
 						}
-						else
-						{
-							$bestResults[$line->currentDriver->playerId] = $line;
-						}
 					}
 				}
+
+				usort($bestResults, 'ModACCHelper::sortByTime');
+				$results[$key]['serverName']  = $server[0]->serverName;
+				$results[$key]['timestamp']   = $data['timestamp'];
+				$results[$key]['next_update'] = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
+				$results[$key]['results']     = $bestResults;
 			}
 
-			usort($bestResults, 'ModACCHelper::sortByTime');
-			$results[$key]['serverName']  = $server[0]->serverName;
-			$results[$key]['timestamp']   = $data['timestamp'];
-			$results[$key]['next_update'] = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
-			$results[$key]['results']     = $bestResults;
+			return $results;
 		}
-
-		return $results;
 	}
 
 }
