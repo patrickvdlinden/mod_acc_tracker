@@ -11,6 +11,7 @@ defined('_JEXEC') or die; ?>
             <th>Best lap</th>
             <th>Gap to leader</th>
             <th>Gap interval</th>
+            <th></th>
             <th>Best S1</th>
             <th>Best S2</th>
             <th>Best S3</th>
@@ -48,6 +49,7 @@ defined('_JEXEC') or die; ?>
 									}
 									?>
                 </td>
+                <td></td>
                 <td>
 									<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestSplits[0]); ?>
                 </td>
