@@ -2,7 +2,6 @@
 defined('_JEXEC') or die('Restricted Access');
 
 use Joomla\CMS\Http\HttpFactory;
-use Joomla\CMS\Factory;
 
 class ModACCHelper {
 
@@ -10,14 +9,12 @@ class ModACCHelper {
 
 	protected $cacheId = 'mod_acc';
 
-	protected $debug = TRUE;
-
 	public function __construct() {
 		$this->cache = JFactory::getCache('mod_acc', '');
 	}
 
 	public function getData() {
-		if (!$this->debug && $this->cache->contains($this->cacheId))
+		if ($this->cache->contains($this->cacheId))
 		{
 			return $this->cache->get($this->cacheId);
 		}
