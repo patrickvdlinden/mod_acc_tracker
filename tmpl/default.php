@@ -6,6 +6,7 @@ defined('_JEXEC') or die; ?>
     <table>
         <thead>
         <tr>
+            <th>#</th>
             <th>Driver</th>
             <th>Best lap</th>
             <th>Gap to leader</th>
@@ -20,6 +21,8 @@ defined('_JEXEC') or die; ?>
         <tbody>
 				<?php foreach ($server['results'] as $key => $bestResult) : ?>
             <tr>
+                <td><?php echo str_pad($key + 1, '2', '0', STR_PAD_LEFT) ?></td>
+
                 <td>
 									<?php echo implode(' ', [
 										$bestResult->currentDriver->firstName ?? '',
@@ -33,7 +36,7 @@ defined('_JEXEC') or die; ?>
 									<?php if ($key > 0)
 									{
 										echo $helper->milisecondsToTimeStap($server['results'][$key]->timing->bestLap -
-											$server['results'][0]->timing->bestLap);
+											$server['results'][0]->timing->bestLap, FALSE);
 									} ?>
                 </td>
                 <td>
@@ -41,7 +44,7 @@ defined('_JEXEC') or die; ?>
 									if ($key > 0)
 									{
 										echo $helper->milisecondsToTimeStap($server['results'][$key]->timing->bestLap - $server['results'][$key -
-											1]->timing->bestLap);
+											1]->timing->bestLap, FALSE);
 									}
 									?>
                 </td>
@@ -62,7 +65,7 @@ defined('_JEXEC') or die; ?>
 									?>
                 </td>
                 <td>
-									<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestLap - $optimal); ?>
+									<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestLap - $optimal, FALSE); ?>
                 </td>
             </tr>
 				<?php endforeach; ?>

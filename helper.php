@@ -38,8 +38,15 @@ class ModACCHelper {
 		return strcmp($a->timing->bestLap, $b->timing->bestLap);
 	}
 
-	public function milisecondsToTimeStap($time) {
-		return floor($time / 60000) . ':' . str_pad(floor(($time % 60000) / 1000), 2, '0') . ':' . str_pad(floor($time % 1000), 3, '0', STR_PAD_LEFT);;
+	public function milisecondsToTimeStap($time, $minutes = TRUE) {
+		$string = '';
+		if ($minutes)
+		{
+			$string .= floor($time / 60000) . ':';
+		}
+		$string .= str_pad(floor(($time % 60000) / 1000), 2, '0', STR_PAD_LEFT) . ':' . str_pad(floor($time % 1000), 3, '0', STR_PAD_LEFT);;
+
+		return $string;
 	}
 
 	public function init() {
