@@ -22,7 +22,7 @@ class ModACCHelper {
 			return $this->cache->get($this->cacheId);
 		}
 		$http     = HttpFactory::getHttp();
-		$response = $http->post('http://results-api.local/', ['AUTH_KEY' => 'gasdg51sdr6g51ser61g6sdr1g']);
+		$response = $http->post('http://20.23.242.54/', ['AUTH_KEY' => 'gasdg51sdr6g51ser61g6sdr1g']);
 		if ($response->code !== 200)
 		{
 			return [];
@@ -54,7 +54,7 @@ class ModACCHelper {
 			$bestResults = [];
 			foreach ($server as $result)
 			{
-				if ($result->sessionResult && $lines = $result->sessionResult->leaderBoardLines)
+				if (isset($result->sessionResult) && $lines = $result->sessionResult->leaderBoardLines)
 				{
 					foreach ($lines as $line)
 					{
