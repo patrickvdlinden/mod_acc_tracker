@@ -81,7 +81,7 @@ class ModACCHelper {
 
 				usort($bestResults, 'ModACCHelper::sortByTime');
 				$results[$key]['serverName']  = $server[0]->serverName;
-				$results[$key]['timestamp']   = $data['timestamp'];
+				$results[$key]['timestamp']   = JDate::createFromFormat('d-m-y H:i', $data['timestamp']);
 				$results[$key]['next_update'] = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
 				$results[$key]['results']     = $bestResults;
 			}
