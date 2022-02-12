@@ -66,14 +66,25 @@ class ModACCHelper {
 						{
 							if (isset($bestResults[$line->currentDriver->playerId]))
 							{
+
 								if ($line->timing->bestLap < $bestResults[$line->currentDriver->playerId]->timing->bestLap)
 								{
 									$bestResults[$line->currentDriver->playerId] = $line;
 								}
+
 							}
 							else
 							{
 								$bestResults[$line->currentDriver->playerId] = $line;
+							}
+
+							if (isset($bestResults[$line->currentDriver->playerId]->totalLapCount))
+							{
+								$bestResults[$line->currentDriver->playerId]->totalLapCount += $line->timing->lapCount;
+							}
+							else
+							{
+								$bestResults[$line->currentDriver->playerId]->totalLapCount = $line->timing->lapCount;
 							}
 						}
 					}

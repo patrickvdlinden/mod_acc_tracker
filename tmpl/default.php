@@ -19,6 +19,7 @@ defined('_JEXEC') or die; ?>
                 <th>Best S3</th>
                 <th>Optimal</th>
                 <th>Opt. diff with Best</th>
+                <th>Total laps</th>
             </tr>
             </thead>
             <tbody>
@@ -70,6 +71,11 @@ defined('_JEXEC') or die; ?>
                     </td>
                     <td>
 											<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestLap - $optimal, FALSE); ?>
+                    </td>
+                    <td>
+                      <pre>
+<?php if(isset($bestResult->totalLapCount)) : echo $bestResult->totalLapCount; endif; ?>
+                        </pre>
                     </td>
                 </tr>
 						<?php endforeach; ?>
