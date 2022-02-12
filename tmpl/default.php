@@ -77,6 +77,13 @@ defined('_JEXEC') or die; ?>
                     </td>
                 </tr>
 						<?php endforeach; ?>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Avg Gap:</td>
+                <td><?php echo $helper->milisecondsToTimeStap($server['avgGap'], FALSE) ?></td>
+            </tr>
             </tbody>
             <caption>Data of completed sessions, will be updated in <?php echo $server['next_update'] ?></caption>
         </table>

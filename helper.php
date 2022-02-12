@@ -58,7 +58,7 @@ class ModACCHelper {
 			foreach ($data['response'] as $key => $server)
 			{
 				$bestResults = [];
-				$lapCounts = [];
+				$lapCounts   = [];
 				foreach ($server as $result)
 				{
 					if (isset($result->sessionResult) && $lines = $result->sessionResult->leaderBoardLines)
@@ -79,9 +79,12 @@ class ModACCHelper {
 								$bestResults[$line->currentDriver->playerId] = $line;
 							}
 
-							if(isset($lapCounts[$line->currentDriver->playerId])) {
+							if (isset($lapCounts[$line->currentDriver->playerId]))
+							{
 								$lapCounts[$line->currentDriver->playerId] += $line->timing->lapCount;
-							} else {
+							}
+							else
+							{
 								$lapCounts[$line->currentDriver->playerId] = $line->timing->lapCount;
 							}
 						}
@@ -89,10 +92,20 @@ class ModACCHelper {
 				}
 
 				usort($bestResults, 'ModACCHelper::sortByTime');
+
+				$gap = [];
+				foreach ($bestResults as $currentKey => $bestResult)
+				{
+					if ($currentKey > 0)
+					{
+						$gap[] = $bestResults[$currentKey]->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
+					}
+				}
+				$results[$key]['avgGap']      = array_sum($gap) / count($gap);
 				$results[$key]['serverName']  = $server[0]->serverName;
 				$results[$key]['next_update'] = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
 				$results[$key]['results']     = $bestResults;
-				$results[$key]['lapCounts']     = $lapCounts;
+				$results[$key]['lapCounts']   = $lapCounts;
 			}
 
 			return $results;
