@@ -73,7 +73,7 @@ defined('_JEXEC') or die; ?>
               </tr>
 					<?php endforeach; ?>
           </tbody>
-          <caption>Data of <?php echo $server['timestamp'] ?> will be updated
+          <caption>Data of completed sessions at <?php echo $server['timestamp'] ?> will be updated
               in <?php echo $server['next_update'] ?></caption>
       </table>
 	<?php endforeach; else : ?>
