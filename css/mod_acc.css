@@ -11,5 +11,9 @@
 
 #mod_acc tbody td, #mod_acc tbody th {
     padding: 5px;
-    border: 1px solid white;
+    border: none;
+}
+
+#mod_acc table {
+    width: auto;
 }
