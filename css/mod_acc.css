@@ -1,0 +1,15 @@
+#mod_acc {
+    background: #000000;
+    color: white;
+    margin-bottom: 60px;
+    overflow: auto;
+}
+
+#mod_acc tbody tr:nth-child(odd) {
+    background: #222222;
+}
+
+#mod_acc tbody td, #mod_acc tbody th {
+    padding: 5px;
+    border: 1px solid white;
+}
