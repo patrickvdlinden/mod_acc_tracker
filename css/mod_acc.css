@@ -10,7 +10,7 @@
 }
 
 #mod_acc tbody td, #mod_acc tbody th {
-    padding: 5px;
+    padding: 5px 10px;
     border: none;
 }
 
