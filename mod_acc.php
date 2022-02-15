@@ -11,7 +11,7 @@ require_once dirname(__FILE__) . '/helper.php';
 $document = JFactory::getDocument();
 $document->addStyleSheet('modules/mod_acc/css/mod_acc.css');
 
-$helper = new ModACCHelper;
+$helper = new ModACCHelper($params);
 $servers = $helper->init();
 
 require JModuleHelper::getLayoutPath('mod_acc');

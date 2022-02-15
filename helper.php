@@ -7,10 +7,13 @@ class ModACCHelper {
 
 	protected Joomla\CMS\Cache\CacheController $cache;
 
-	protected $cacheId = 'mod_acc';
+	protected string $cacheId = 'mod_acc';
 
-	public function __construct() {
-		$this->cache = JFactory::getCache('mod_acc', '');
+	private Joomla\Registry\Registry $params;
+
+	public function __construct($params) {
+		$this->cache  = JFactory::getCache('mod_acc', '');
+		$this->params = $params;
 	}
 
 	public function getData() {
@@ -18,8 +21,18 @@ class ModACCHelper {
 		{
 			return $this->cache->get($this->cacheId);
 		}
-		$http     = HttpFactory::getHttp();
-		$response = $http->post('http://20.23.242.54/', ['AUTH_KEY' => 'gasdg51sdr6g51ser61g6sdr1g']);
+		$http = HttpFactory::getHttp();
+		if ($this->params->get('server'))
+		{
+			$response = $http->post($this->params->get('server'), [
+				'AUTH_KEY'            => $this->params->get('auth_key', NULL),
+				'RESULTS_SERVER_PATH' => $this->params->get('server_path', NULL),
+			]);
+		}
+		else
+		{
+			return [];
+		}
 		if ($response->code !== 200)
 		{
 			return [];
@@ -101,11 +114,12 @@ class ModACCHelper {
 						$gap[] = $bestResults[$currentKey]->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
 					}
 				}
-				$results[$key]['avgGap']      = array_sum($gap) / count($gap);
-				$results[$key]['serverName']  = $server[0]->serverName;
-				$results[$key]['next_update'] = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
-				$results[$key]['results']     = $bestResults;
-				$results[$key]['lapCounts']   = $lapCounts;
+				$results[$key]['avgGap']        = array_sum($gap) / count($gap);
+				$results[$key]['serverName']    = $server[0]->serverName;
+				$results[$key]['next_update']   = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
+				$results[$key]['results']       = $bestResults;
+				$results[$key]['lapCounts']     = $lapCounts;
+				$results[$key]['totalLapCount'] = array_sum($lapCounts);
 			}
 
 			return $results;

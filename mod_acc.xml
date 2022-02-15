@@ -2,18 +2,42 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Acc server companion</name>
     <author>Jesper Holster</author>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
     <description>A joomla module to display acc results</description>
     <files>
         <filename>mod_acc.xml</filename>
         <filename module="mod_acc">mod_acc.php</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
-        <filename>tmpl/default.php</filename>
-        <filename>tmpl/index.html</filename>
-        <filename>css/mod_acc.css</filename>
-        <filename>css/index.html</filename>
+        <folder>css</folder>
+        <folder>tmpl</folder>
     </files>
     <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                        name="server"
+                        type="text"
+                        label="Server path"
+                        description="Fill server location ip/domain."
+                        default="20.23.242.54:40006"
+                />
+                <field
+                        name="auth_key"
+                        type="text"
+                        label="Server auth key"
+                        hint="looks like a password"
+                        description="Fill the auth key of the results api."
+                />
+                <field
+                        name="server_path"
+                        type="text"
+                        label="Server path"
+                        hint="C:\Race Servers\%SERVERNAME%\server\results"
+                        description="Fill absolute path of the server you want to see the results of."
+                />
+            </fieldset>
+        </fields>
     </config>
+
 </extension>

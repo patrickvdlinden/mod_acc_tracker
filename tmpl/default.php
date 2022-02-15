@@ -81,8 +81,14 @@ defined('_JEXEC') or die; ?>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td>Avg Gap:</td>
+                <th>Avg Gap:</th>
                 <td><?php echo $helper->milisecondsToTimeStap($server['avgGap'], FALSE) ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th colspan="2">Total laps completed:</th>
+                <td><?php echo $server['totalLapCount']; ?></td>
             </tr>
             </tbody>
             <caption>Data of completed sessions, will be updated in <?php echo $server['next_update'] ?></caption>
