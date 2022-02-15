@@ -82,7 +82,7 @@ defined('_JEXEC') or die; ?>
                 <td></td>
                 <td></td>
                 <th>Avg Gap:</th>
-                <td><?php echo $helper->milisecondsToTimeStap($server['avgGap'], FALSE) ?></td>
+                <td><?php echo $helper->milisecondsToTimeStap($server['avgGap'] ?? 0, FALSE) ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
