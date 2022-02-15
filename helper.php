@@ -7,16 +7,17 @@ class ModACCHelper {
 
 	protected Joomla\CMS\Cache\CacheController $cache;
 
-	protected string $cacheId = 'mod_acc';
+	protected string $cacheId;
 
 	private Joomla\Registry\Registry $params;
 
 	public function __construct($params) {
-		$this->cache  = JFactory::getCache('mod_acc', '');
-		$this->params = $params;
+		$this->cache   = JFactory::getCache('mod_acc', '');
+		$this->params  = $params;
+		$this->cacheId = 'mod_acc_' . md5($this->params->get('server_path', 'randomstring'));
 	}
 
-	public function getData() {
+	public function getData(): array {
 		if ($this->cache->contains($this->cacheId))
 		{
 			return $this->cache->get($this->cacheId);
@@ -62,7 +63,7 @@ class ModACCHelper {
 		return $string;
 	}
 
-	public function init() {
+	public function init(): array {
 		$data    = $this->getData();
 		$results = [];
 
@@ -111,7 +112,7 @@ class ModACCHelper {
 				{
 					if ($currentKey > 0)
 					{
-						$gap[] = $bestResults[$currentKey]->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
+						$gap[] = $bestResult->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
 					}
 				}
 				$results[$key]['avgGap']        = array_sum($gap) / count($gap);
@@ -122,8 +123,9 @@ class ModACCHelper {
 				$results[$key]['totalLapCount'] = array_sum($lapCounts);
 			}
 
-			return $results;
 		}
+
+		return $results;
 	}
 
 }
