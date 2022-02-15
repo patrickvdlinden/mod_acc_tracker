@@ -4,7 +4,6 @@ defined('_JEXEC') or die; ?>
 <div id="mod_acc">
 	<?php if ($servers) :
 		foreach ($servers as $server) : ?>
-        <h2><?php echo $server['serverName'] ?></h2>
         <table>
             <thead>
             <tr>
