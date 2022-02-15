@@ -2,15 +2,17 @@
 <extension type="module" version="3.1.0" client="site" method="upgrade">
     <name>Acc server companion</name>
     <author>Jesper Holster</author>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <description>A joomla module to display acc results</description>
     <files>
         <filename>mod_acc.xml</filename>
         <filename module="mod_acc">mod_acc.php</filename>
         <filename>index.html</filename>
         <filename>helper.php</filename>
-        <folder>css</folder>
-        <folder>tmpl</folder>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+        <filename>css/mod_acc.css</filename>
+        <filename>css/index.html</filename>
     </files>
     <config>
         <fields name="params">
@@ -20,7 +22,7 @@
                         type="text"
                         label="Server path"
                         description="Fill server location ip/domain."
-                        default="20.23.242.54:40006"
+                        default="http://20.23.242.54"
                 />
                 <field
                         name="auth_key"

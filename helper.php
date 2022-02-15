@@ -116,7 +116,7 @@ class ModACCHelper {
 				}
 				$results[$key]['avgGap']        = array_sum($gap) / count($gap);
 				$results[$key]['serverName']    = $server[0]->serverName;
-				$results[$key]['next_update']   = date("i:s", strtotime($data['timestamp']) - strtotime('+1 hours 1 second'));
+				$results[$key]['next_update']   = date("i:s", strtotime($data['timestamp']) - strtotime('+30 minutes 1 second'));
 				$results[$key]['results']       = $bestResults;
 				$results[$key]['lapCounts']     = $lapCounts;
 				$results[$key]['totalLapCount'] = array_sum($lapCounts);
