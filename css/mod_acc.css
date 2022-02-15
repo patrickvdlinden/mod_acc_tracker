@@ -17,3 +17,7 @@
 #mod_acc table {
     width: auto;
 }
+
+#mod_acc .car-logo {
+    width: 25px;
+}

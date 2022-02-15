@@ -11,10 +11,32 @@ class ModACCHelper {
 
 	private Joomla\Registry\Registry $params;
 
+	private array $carList;
+
+	protected function getCars(): array {
+		$db      = JFactory::getDbo();
+		$query   = $db->getQuery(TRUE);
+		$carList = [];
+		// Select the required fields from the table.
+		$query->select('DISTINCT a.*');
+		$query->from('`#__acc_cars` AS a');
+		$db->setQuery($query);
+		$results = $db->loadAssocList();
+
+		foreach ($results as $car)
+		{
+			$carList[$car['acc_id']] = $car;
+		}
+
+		return $carList;
+	}
+
 	public function __construct($params) {
 		$this->cache   = JFactory::getCache('mod_acc', '');
 		$this->params  = $params;
 		$this->cacheId = 'mod_acc_' . md5($this->params->get('server_path', 'randomstring'));
+		$this->carList = $this->getCars();
+
 	}
 
 	public function getData(): array {
@@ -113,6 +135,16 @@ class ModACCHelper {
 					{
 						$gap[] = $bestResult->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
 					}
+
+					if (isset($this->carList[$bestResult->car->carModel]))
+					{
+						$bestResult->car = $this->carList[$bestResult->car->carModel];
+					}
+					else
+					{
+						$bestResult->car = 'Id: ' . $bestResult->car->carModel;
+					}
+
 				}
 				if (count($gap))
 				{

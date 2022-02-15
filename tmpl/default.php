@@ -9,6 +9,7 @@ defined('_JEXEC') or die; ?>
             <tr>
                 <th>#</th>
                 <th>Driver</th>
+                <th>Car</th>
                 <th>Best lap</th>
                 <th>Gap to leader</th>
                 <th>Gap interval</th>
@@ -30,7 +31,20 @@ defined('_JEXEC') or die; ?>
 											<?php echo implode(' ', [
 												$bestResult->currentDriver->firstName ?? '',
 												$bestResult->currentDriver->lastName ?? '',
-											]); ?>
+											]);
+											?>
+
+                    </td>
+                    <td>
+											<?php if (is_array($bestResult->car))
+											{ ?>
+                          <img src="<?php echo $bestResult->car['logo']; ?>"
+                               alt="<?php echo $bestResult->car['name'] ?>" class="car-logo">
+											<?php }
+											else
+											{
+												echo $bestResult->car;
+											} ?>
                     </td>
                     <td>
 											<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestLap); ?>
