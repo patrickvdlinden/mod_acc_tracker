@@ -19,5 +19,12 @@
 }
 
 #mod_acc .car-logo {
-    width: 25px;
+    width: 35px;
+    height: 35px;
+    background-color: #222222;
+    background-size: 32px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 50%;
+    overflow: hidden;
 }

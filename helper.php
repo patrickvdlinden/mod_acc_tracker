@@ -101,9 +101,12 @@ class ModACCHelper {
 					{
 						foreach ($lines as $line)
 						{
+							if ($line->timing->bestLap > 200000)
+							{
+								continue;
+							}
 							if (isset($bestResults[$line->currentDriver->playerId]))
 							{
-
 								if ($line->timing->bestLap < $bestResults[$line->currentDriver->playerId]->timing->bestLap)
 								{
 									$bestResults[$line->currentDriver->playerId] = $line;

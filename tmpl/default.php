@@ -38,13 +38,13 @@ defined('_JEXEC') or die; ?>
                     <td>
 											<?php if (is_array($bestResult->car))
 											{ ?>
-                          <img src="<?php echo $bestResult->car['logo']; ?>"
-                               alt="<?php echo $bestResult->car['name'] ?>" class="car-logo">
-											<?php }
-											else
-											{
-												echo $bestResult->car;
-											} ?>
+                        <div style="background-image: url(<?php echo $bestResult->car['logo']; ?>)"
+                             title="<?php echo $bestResult->car['name'] ?>" class="car-logo">
+													<?php }
+													else
+													{
+														echo $bestResult->car;
+													} ?>
                     </td>
                     <td>
 											<?php echo $helper->milisecondsToTimeStap($bestResult->timing->bestLap); ?>
@@ -91,6 +91,7 @@ defined('_JEXEC') or die; ?>
                 </tr>
 						<?php endforeach; ?>
             <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
