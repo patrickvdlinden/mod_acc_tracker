@@ -91,76 +91,73 @@ class ModACCHelper {
 
 		if (isset($data['response']))
 		{
-			foreach ($data['response'] as $key => $server)
+			$bestResults = [];
+			$lapCounts   = [];
+			foreach ($data['response'] as $key => $result)
 			{
-				$bestResults = [];
-				$lapCounts   = [];
-				foreach ($server as $result)
+				if (isset($result->sessionResult) && $lines = $result->sessionResult->leaderBoardLines)
 				{
-					if (isset($result->sessionResult) && $lines = $result->sessionResult->leaderBoardLines)
+					foreach ($lines as $line)
 					{
-						foreach ($lines as $line)
+						if ($line->timing->bestLap > 200000)
 						{
-							if ($line->timing->bestLap > 200000)
-							{
-								continue;
-							}
-							if (isset($bestResults[$line->currentDriver->playerId]))
-							{
-								if ($line->timing->bestLap < $bestResults[$line->currentDriver->playerId]->timing->bestLap)
-								{
-									$bestResults[$line->currentDriver->playerId] = $line;
-								}
-
-							}
-							else
+							continue;
+						}
+						if (isset($bestResults[$line->currentDriver->playerId]))
+						{
+							if ($line->timing->bestLap < $bestResults[$line->currentDriver->playerId]->timing->bestLap)
 							{
 								$bestResults[$line->currentDriver->playerId] = $line;
 							}
-							if (isset($lapCounts[$line->currentDriver->playerId]))
-							{
-								$lapCounts[$line->currentDriver->playerId] += $line->timing->lapCount;
-							}
-							else
-							{
-								$lapCounts[$line->currentDriver->playerId] = $line->timing->lapCount;
-							}
+
+						}
+						else
+						{
+							$bestResults[$line->currentDriver->playerId] = $line;
+						}
+						if (isset($lapCounts[$line->currentDriver->playerId]))
+						{
+							$lapCounts[$line->currentDriver->playerId] += $line->timing->lapCount;
+						}
+						else
+						{
+							$lapCounts[$line->currentDriver->playerId] = $line->timing->lapCount;
 						}
 					}
 				}
-
-				usort($bestResults, 'ModACCHelper::sortByTime');
-
-				$gap = [];
-				foreach ($bestResults as $currentKey => $bestResult)
-				{
-					if ($currentKey > 0)
-					{
-						$gap[] = $bestResult->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
-					}
-
-					if (isset($this->carList[$bestResult->car->carModel]))
-					{
-						$bestResult->car = $this->carList[$bestResult->car->carModel];
-					}
-					else
-					{
-						$bestResult->car = 'Id: ' . $bestResult->car->carModel;
-					}
-
-				}
-				if (count($gap))
-				{
-					$results[$key]['avgGap'] = array_sum($gap) / count($gap);
-				}
-				$results[$key]['serverName']    = $server[0]->serverName;
-				$results[$key]['next_update']   = date("i:s", strtotime($data['timestamp']) - strtotime('+30 minutes 1 second'));
-				$results[$key]['results']       = $bestResults;
-				$results[$key]['lapCounts']     = $lapCounts;
-				$results[$key]['totalLapCount'] = array_sum($lapCounts);
 			}
 
+			usort($bestResults, 'ModACCHelper::sortByTime');
+
+			$gap = [];
+			foreach ($bestResults as $currentKey => $bestResult)
+			{
+				if ($currentKey > 0)
+				{
+					$gap[] = $bestResult->timing->bestLap - $bestResults[$currentKey - 1]->timing->bestLap;
+				}
+
+				if (isset($this->carList[$bestResult->car->carModel]))
+				{
+					$bestResult->car = $this->carList[$bestResult->car->carModel];
+				}
+				else
+				{
+					$bestResult->car = 'Id: ' . $bestResult->car->carModel;
+				}
+
+			}
+			if (count($gap))
+			{
+				$results[$key]['avgGap'] = array_sum($gap) / count($gap);
+			}
+			$results[$key]['serverName']    = $data['response'][0]->serverName;
+			$results[$key]['next_update']   = date("i:s", strtotime($data['timestamp']) - strtotime('+30 minutes 1 second'));
+			$results[$key]['results']       = $bestResults;
+			$results[$key]['lapCounts']     = $lapCounts;
+			$results[$key]['totalLapCount'] = array_sum($lapCounts);
 		}
+
 
 		return $results;
 	}
