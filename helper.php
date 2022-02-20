@@ -71,7 +71,7 @@ class ModACCHelper {
 	}
 
 	protected static function sortByTime($a, $b): int {
-		return strcmp($a->timing->bestLap, $b->timing->bestLap);
+		return $a->timing->bestLap - $b->timing->bestLap;
 	}
 
 	public function milisecondsToTimeStap($time, $minutes = TRUE) {
