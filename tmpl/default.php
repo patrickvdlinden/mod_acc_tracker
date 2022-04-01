@@ -108,6 +108,6 @@ defined('_JEXEC') or die; ?>
             <caption>Data of completed sessions, will be updated in <?php echo $server['next_update'] ?></caption>
         </table>
 		<?php endforeach; else : ?>
-      <p>Something went wrong, please contact an administrator.</p>
+      <p>No results available.</p>
 	<?php endif; ?>
 </div>

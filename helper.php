@@ -89,7 +89,7 @@ class ModACCHelper {
 		$data    = $this->getData();
 		$results = [];
 
-		if (isset($data['response']))
+		if (isset($data['response']) && $data['response'])
 		{
 			$bestResults = [];
 			$lapCounts   = [];
