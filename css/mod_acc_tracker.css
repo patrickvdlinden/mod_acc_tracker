@@ -1,24 +1,25 @@
-#mod_acc {
+#mod_acc_tracker {
     background: #000000;
     color: white;
     margin-bottom: 60px;
     overflow: auto;
 }
 
-#mod_acc tbody tr:nth-child(odd) {
+#mod_acc_tracker tbody tr:nth-child(odd) {
     background: #222222;
 }
 
-#mod_acc tbody td, #mod_acc tbody th {
+#mod_acc_tracker tbody td,
+#mod_acc_tracker tbody th {
     padding: 5px 10px;
     border: none;
 }
 
-#mod_acc table {
+#mod_acc_tracker table {
     width: auto;
 }
 
-#mod_acc .car-logo {
+#mod_acc_tracker .car-logo {
     width: 35px;
     height: 35px;
     background-color: #222222;

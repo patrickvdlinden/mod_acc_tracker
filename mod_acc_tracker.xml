@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="3.1.0" client="site" method="upgrade">
+    <name>Embed ACC Tracker</name>
+    <author>Patrick van der Linden, Jesper Holster</author>
+    <version>1.0.0</version>
+    <description>A joomla module to embed ACC Tracker results hosted on different domain without using an iframe</description>
+    <files>
+        <filename>mod_acc_tracker.xml</filename>
+        <filename module="mod_acc_tracker">mod_acc_tracker.php</filename>
+        <filename>index.html</filename>
+        <filename>tmpl/default.php</filename>
+        <filename>tmpl/index.html</filename>
+        <filename>css/mod_acc_tracker.css</filename>
+        <filename>css/index.html</filename>
+        <filename>js/mod_acc_tracker.js</filename>
+    </files>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                        name="acc_tracker_request_path"
+                        type="text"
+                        label="ACC Tracker request path"
+                        description="Enter the direct URL for the ACC Tracker results page"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>
