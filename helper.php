@@ -3,24 +3,15 @@ defined('_JEXEC') or die('Restricted Access');
 
 use Joomla\CMS\Http\HttpFactory;
 
-class ModACCHelper {
-
-  protected Joomla\CMS\Cache\CacheController $cache;
-
-  protected string $cacheId;
+class ModACCTrackerHelper {
 
   private Joomla\Registry\Registry $params;
 
   public function __construct($params) {
-    $this->cache = JFactory::getCache('mod_acc_tracker', '');
     $this->params = $params;
-    $this->cacheId = 'mod_acc_tracker_' . md5($this->params->get('server_path', 'randomstring'));
   }
 
   public function getData(): string {
-    if ($this->cache->contains($this->cacheId)) {
-      return $this->cache->get($this->cacheId);
-    }
     $http = HttpFactory::getHttp();
     if ($this->params->get('acc_tracker_request_path')) {
       $response = $http->get($this->params->get('acc_tracker_request_path'));
@@ -33,7 +24,6 @@ class ModACCHelper {
     }
     else {
       $resultsTable = stripResultsTable($response->body);
-      $this->cache->store($resultsTable, $this->cacheId);
       return $resultsTable;
     }
   }
