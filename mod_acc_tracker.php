@@ -12,7 +12,6 @@ require_once dirname(__FILE__) . '/helper.php';
 
 $document = JFactory::getDocument();
 $document->addStyleSheet('modules/mod_acc_tracker/css/mod_acc_tracker.css');
-$document->addScriptDeclaration('const ACC_TRACKER_REQUEST_PATH = "' . $params->get('acc_tracker_request_path') . '";');
 $document->addScript('modules/mod_acc_tracker/js/mod_acc_tracker.js');
 
 $helper = new ModACCTrackerHelper($params);

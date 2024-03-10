@@ -13,6 +13,7 @@
         <filename>css/mod_acc_tracker.css</filename>
         <filename>css/index.html</filename>
         <filename>js/mod_acc_tracker.js</filename>
+        <filename>helper.php</filename>
     </files>
     <config>
         <fields name="params">
