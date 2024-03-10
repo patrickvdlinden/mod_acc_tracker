@@ -23,12 +23,12 @@ class ModACCTrackerHelper {
       return '<p style="color: red;">Failed to retrieve the results.</p>';
     }
     else {
-      $resultsTable = stripResultsTable($response->body);
+      $resultsTable = $this->stripResultsTable($response->body);
       return $resultsTable;
     }
   }
 
-  public function stripResultsTable($responseText) {
+  public function stripResultsTable($responseText): string {
     // We only need the actual <table> and not the HTML around it.
     $startIndexOfResults = stripos($responseText, '<table');
     $endIndexOfResults = stripos($responseText, '</table>');

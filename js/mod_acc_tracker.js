@@ -23,11 +23,11 @@
             return;
         }
 
-        let refreshCaption = resultsTable.getElementById('refresh_caption');
+        let refreshCaption = document.getElementById('refresh_caption');
         if (!refreshCaption) {
             refreshCaption = document.createElement('caption');
             refreshCaption.id = 'refresh_caption';
-            resultsTable.appendChild(caption);
+            resultsTable.appendChild(refreshCaption);
         }
 
         refreshCaption.innerText = `Data of completed sessions, will be updated in ${formatTime(countdown)}`;
